@@ -9,6 +9,7 @@
     "contextMenus",
     "notifications",
     "activeTab",
+    "declarativeContent",
     "<all_urls>",
     "*://*/*"
   ],
@@ -24,20 +25,26 @@
     "persistent": false
   },
   "devtools_page": "devtools.html",
-  "browser_action": {
+  "page_action": {
     "default_popup": "popup.html",
     "default_title": "__MSG_extName__",
     "default_icon": {
-      "19": "icons/ali.png",
-      "38": "icons/ali.png"
+      "19": "icons/em.png",
+      "38": "icons/em.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": [
+        "js/content-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
   "omnibox": { "keyword" : "go" },
   "options_ui": {
     "page": "options.html",
     "browser_style": true
-  },
-  "chrome_url_overrides":{
-    "newtab": "override.html"
   }
 }

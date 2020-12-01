@@ -11,3 +11,12 @@ chrome.devtools.panels.elements.createSidebarPane("Images", function(sidebar) {
     sidebar.setExpression('document.querySelectorAll("img")', 'All Images'); // 通过表达式来指定
     // sidebar.setObject({aaa: 111, bbb: 'Hello World!'}); // 直接设置显示某个对象
 });
+
+// 下列代码实现了记录所有加载过的大于40kb的图片的URL：
+chrome.devtools.network.onRequestFinished.addListener(
+  function(request) {
+    if (request.response.bodySize > 40*1024)
+    chrome.experimental.devtools.console.addMessage(
+        chrome.experimental.devtools.console.Severity.Warning,
+        "Large image: " + request.request.url);
+});
